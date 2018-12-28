@@ -19,11 +19,25 @@ class Reminder:
     def job(self):
         self.counter += 1
         print(f"{self.counter}. run since start")
-        page = requests.get("https://www.km.bayern.de/lehrer/lehrerausbildung/gymnasium/quereinstieg.html")
+        self.check_berufschule_site()
+        self.check_gymnasium_site()
+
+    def check_gymnasium_site(self):
+        if self.check_informatik_existance(
+                "https://www.km.bayern.de/lehrer/lehrerausbildung/gymnasium/quereinstieg.html"):
+            self.send("Quereinsteiger für Informatik (Gymnasium) vorhanden!")
+
+    def check_berufschule_site(self):
+        if self.check_informatik_existance(
+                "https://www.km.bayern.de/lehrer/lehrerausbildung/gymnasium/quereinstieg.html"):
+            self.send("Quereinsteiger für Informatik (Berufschule) vorhanden!")
+
+    def check_informatik_existance(self, url: str):
+        page = requests.get(url)
         if page.status_code == 200:
             soup = BeautifulSoup(page.content, 'html.parser')
             if 'informatik' in soup.prettify().lower():
-                self.send("Quereinsteiger für Informatik (Gymnasium) vorhanden!")
+                return True
         else:
             self.send("Kultusministerium Seite down oder Probleme bei der Abfrage")
 
