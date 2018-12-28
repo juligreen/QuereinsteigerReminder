@@ -1,0 +1,27 @@
+= QuereinsteigerReminder
+Doc Writer <julius.dehner@gmail.com>
+
+As this project is aimed at german users the rest of the README will be in german.
+
+== Verwendungszweck
+Als Informatiker hat man möglicherweise das Interesse Lehrer zu werden.
+Falls Sie, der Leser, dieses Interesse haben und in Bayern wohnen ist dieses Tool für Sie interessant.
+
+Die Webseite des Kultusministeriums hat keine Alarmfunktion, die eine Benachrichtigung für mögliche offene Stellen verschickt.
+Dieses Programm soll das ersetzen.
+
+Es lädt 1x pro Tag die Seite des Kultusministeriums für Quereinsteiger bei Gymnasien oder Berufsschulen herunter und überprüft, ob der String Informatik hier vorkommt.
+Falls das der Fall ist, versendet es eine Telegram Nachricht an Sie.
+
+== Installation
+Ich empfehle Docker zur Installation.
+
+- Docker installieren https://docs.docker.com/toolbox/overview/[Windows] | https://docs.docker.com/install/linux/docker-ce/ubuntu/[Ubuntu]
+- Erstelle einen Telegram Bot, indem man mit https://t.me/botfather[BotFather] redet und speichere das Token
+- Notiere Chat id, die man bon @get_id_bot und dem "/my_id" command bekommt
+- Ändere die https://github.com/juligreen/QuereinsteigerReminder/blob/master/resources/configuration.ini.example[configuration.ini.example] und speichere sie als configuration.ini
+- Nun starten Sie den Docker Container mit der folgenden Anweisung (tauschen Sie path/to/folder/which/contains/configuration.ini mit dem Ordner aus, in dem Ihre configuration.ini liegt)
+
+ docker run -d --name QuereinsteigerReminder --restart unless-stopped  -v path/to/folder/which/contains/configuration.ini:/resources juligreen/quereinsteigerreminder
+
+- Profit!
