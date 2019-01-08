@@ -1,5 +1,5 @@
 FROM python:3.7-alpine
-ADD . .
+COPY . .
 RUN apk add gcc \
     musl-dev \
     python3-dev \
